@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "635218370690",
+    "project_id": "libraryproject-6ae21",
+    "storage_bucket": "libraryproject-6ae21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635218370690:android:8c1cc530762632ae20949b",
+        "android_client_info": {
+          "package_name": "net.larntech.libraryproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635218370690-3iip2ij9t40eetfr50vt7ilcer5j1t06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeB4454ks792omW4WjD6rizRvkjT2RQXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635218370690-3iip2ij9t40eetfr50vt7ilcer5j1t06.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
