@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/TvUsername"
+        app:layout_constraintBottom_toTopOf="@id/TvEmail"
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TvUsername"
+        android:id="@+id/TvEmail"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         android:layout_marginStart="30dp"
         >
         <EditText
-            android:id="@+id/EdUsername"
+            android:id="@+id/EdEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
@@ -45,7 +45,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TvPassword"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/TvUsername"
+        app:layout_constraintTop_toBottomOf="@id/TvEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
@@ -73,14 +73,6 @@
         android:id="@+id/btnRegister"
         android:text="Register"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
-        android:layout_margin="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <Button
-        android:id="@+id/btnBack"
-        android:text="Back"
-        app:layout_constraintTop_toBottomOf="@id/btnRegister"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

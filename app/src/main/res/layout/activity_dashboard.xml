@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
-    <TextView
-        android:text="Hello"
+    <Button
+        android:id="@+id/btnLogout"
+        android:text="Log out"
         android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

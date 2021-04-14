@@ -18,43 +18,35 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         auth= FirebaseAuth.getInstance();
-
-        var button=findViewById<Button>(R.id.btnRegister)
-        button.setOnClickListener {
-            if (EdEmail.text.isNotEmpty()|| EdPassword.text.isNotEmpty()){
-                registerUser()
+        btn_Login.setOnClickListener {
+            val  intent = Intent(this,LoginActivity::class .java)
+            startActivity(intent)
+        }
+        btn_Register.setOnClickListener {
+            if (Ed_Email.text.trim().toString().isNotEmpty()|| Ed_Password.text.trim().toString().isNotEmpty()){
+                registerUser(Ed_Email.text.trim().toString(),Ed_Password.text.trim().toString())
             }else{
                 Toast.makeText(this,"Input Required",Toast.LENGTH_LONG).show()
             }
         }
 
-        var button2=findViewById<Button>(R.id.btnBack)
-        button2.setOnClickListener {
-            val  intent = Intent(this,LoginActivity::class .java)
-            startActivity(intent)
-        }
+
     }
 
-    fun registerUser(){
-        auth.createUserWithEmailAndPassword(EdEmail.text.trim().toString(), EdPassword.text.trim().toString())
-            .addOnCompleteListener(this){
-                task ->
-                if(task.isSuccessful){
-                    Toast.makeText(this,"Register successful",Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(this,"Register failed"+task.exception,Toast.LENGTH_LONG).show()
+    fun registerUser(email:String,password:String){
+        auth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this){task ->
+                    if (task.isSuccessful){
+                        Log.e("Task Message","Successful...");
+
+                        var intent=Intent(this,DashboardActivity::class.java);
+                        startActivity(intent)
+
+                    }else{
+                        Log.e("Task Message","Failed..."+task.exception)
+                    }
                 }
-            }
+
     }
 
-    override fun onStart() {
-        super.onStart()
-        val user = auth.currentUser
-        if (user !=null){
-            val intent= Intent(this,DashboardActivity::class.java)
-            startActivity(intent)
-        }else{
-            Log.e("user status","User null")
-        }
-    }
 }
