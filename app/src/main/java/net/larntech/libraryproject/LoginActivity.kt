@@ -24,12 +24,15 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnLogin.setOnClickListener {  }
-        if(EdEmail.text.trim().toString().isNotEmpty() || EdPassword.text.trim().toString().isNotEmpty()){
+        btnLogin.setOnClickListener {
+
+            if(EdEmail.text.trim().toString().isNotEmpty() || EdPassword.text.trim().toString().isNotEmpty()){
             signInUser(EdEmail.text.trim().toString(), EdPassword.text.trim().toString())
         }else{
             Toast.makeText(this, "Input required",Toast.LENGTH_LONG).show()
+            }
         }
+
 
 
     }
