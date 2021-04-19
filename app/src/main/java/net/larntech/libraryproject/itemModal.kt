@@ -2,8 +2,8 @@ package net.larntech.libraryproject
 
 import java.io.Serializable
 
-data class itemModal (
+data class ItemModal (
      var image:Int,
-     var names:String,
+     var name:String,
      var desc:String,
  ):Serializable

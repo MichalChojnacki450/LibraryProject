@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.larntech.libraryproject">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,10 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LibraryProject">
+        <activity android:name=".Book5Activity"></activity>
+        <activity android:name=".Book4Activity" />
+        <activity android:name=".Book3Activity" />
+        <activity android:name=".Book2Activity" />
+        <activity android:name=".Book1Activity" />
         <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
-            android:theme="@style/Theme.LibraryProject.NoActionBar"></activity>
+            android:theme="@style/Theme.LibraryProject.NoActionBar" />
         <activity android:name=".RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity">
-
-        </activity>
-
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
