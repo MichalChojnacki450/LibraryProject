@@ -3,18 +3,22 @@ package net.larntech.libraryproject
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.example_item.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ExampleAdapter(
-        private val exampleList: List<ExampleItem>,
-        private val listener: AdapterView.OnItemClickListener
+        private var exampleList: ArrayList<ExampleItem>,
+        private val listener: OnItemClickListener,
 ) :
 
-        RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>() {
+        RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>(){
+
+    lateinit var exampleListFilter: ArrayList<ExampleItem>
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.example_item,
@@ -46,8 +50,8 @@ class ExampleAdapter(
             }
         }
     }
-
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 }
+
