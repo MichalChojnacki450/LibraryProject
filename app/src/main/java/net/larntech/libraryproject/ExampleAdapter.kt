@@ -16,10 +16,6 @@ class ExampleAdapter(
 
         RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>(){
 
-    lateinit var exampleListFilter: ArrayList<ExampleItem>
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.example_item,
                 parent, false)

@@ -3,6 +3,7 @@ package net.larntech.libraryproject
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import android.view.View
@@ -17,8 +18,21 @@ import kotlin.collections.ArrayList
 
 class DashboardActivity : AppCompatActivity(),ExampleAdapter.OnItemClickListener {
     private lateinit var auth: FirebaseAuth;
-    private val exampleList = generateDummyList(20)
-    val displayExampleList = generateDummyList(20)
+    var exampleItemList = arrayOf(
+            ExampleItem(R.drawable.book1,"LOTR","Fantasy"),
+            ExampleItem(R.drawable.book1,"SW","SinceFiction"),
+            ExampleItem(R.drawable.book1,"MarvelUniverse","Heroes"),
+            ExampleItem(R.drawable.book1,"DcUniverse","Heroes"),
+            ExampleItem(R.drawable.book1,"GOT","Fantasy"),
+            ExampleItem(R.drawable.book1,"StarTrek","SinceFiction"),
+            ExampleItem(R.drawable.book1,"Hobbit","Fantasy"),
+            ExampleItem(R.drawable.book1,"Titanic","Romans"),
+            ExampleItem(R.drawable.book1,"WW2","Document"),
+            ExampleItem(R.drawable.book1,"Chain","Horror"),
+
+    )
+    var exampleList = ArrayList<ExampleItem>();
+    val displayExampleList = ArrayList<ExampleItem>();
     val adapter = ExampleAdapter(displayExampleList,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,21 +41,30 @@ class DashboardActivity : AppCompatActivity(),ExampleAdapter.OnItemClickListener
 
         auth = FirebaseAuth.getInstance()
 
+        for (item in exampleItemList){
+            exampleList.add(item)
+        }
+
         displayExampleList.addAll(exampleList)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-
-        btnSignOut.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 
-    fun addItem(view: View) {
+    fun  bookMark(menuItem: MenuItem){
+        val  intent = Intent(this,BookmarkActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun signOut(menuItem: MenuItem){
+        auth.signOut()
+        val intent =Intent(this,LoginActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun addItem(menuItem: MenuItem) {
         val index = Random.nextInt(8)
         val newItem = ExampleItem(
                 R.drawable.book1,
@@ -51,36 +74,20 @@ class DashboardActivity : AppCompatActivity(),ExampleAdapter.OnItemClickListener
         exampleList.add(index, newItem)
         adapter.notifyItemInserted(index)
     }
-    fun removeItem(view: View) {
+    fun removeItem(menuItem: MenuItem) {
         val index = Random.nextInt(8)
         exampleList.removeAt(index)
         adapter.notifyItemRemoved(index)
     }
 
     override fun  onItemClick(position: Int){
-        Toast.makeText(this,"Item $position clicked",Toast.LENGTH_SHORT).show()
-        var clickedItem = exampleList[position]
-        clickedItem.name="Clicked"
-        adapter.notifyItemChanged(position)
+        val intent=Intent(this,DescriptionActivity::class.java)
+        startActivity(intent)
     }
-
-    private fun generateDummyList(size: Int): ArrayList<ExampleItem> {
-        val list = ArrayList<ExampleItem>()
-        for (i in 0 until size) {
-            val drawable = when (i % 3) {
-                0 -> R.drawable.book1
-                1 -> R.drawable.book1
-                else -> R.drawable.book1
-            }
-            val item = ExampleItem(drawable, "Item $i", "Line 2")
-            list += item
-        }
-        return list
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menuitems,menu);
 
         var menuItem = menu!!.findItem(R.id.searchView);
 
@@ -98,7 +105,7 @@ class DashboardActivity : AppCompatActivity(),ExampleAdapter.OnItemClickListener
                         displayExampleList.clear()
                         val search = newText.toLowerCase(Locale.getDefault())
                         exampleList.forEach{
-                            if(it.name.toLowerCase(Locale.getDefault()).contains(search)) {
+                            if(it.name.toLowerCase(Locale.getDefault()).contains(search)|| it.desc.toLowerCase(Locale.getDefault()).contains(search) ) {
                                 displayExampleList.add(it)
                             }
                         }
@@ -118,5 +125,17 @@ class DashboardActivity : AppCompatActivity(),ExampleAdapter.OnItemClickListener
             })
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var  selectedOption=""
+        when(item?.itemId){
+            R.id.Bookmark -> selectedOption = "Bookmark"
+            R.id.AddItem -> selectedOption = "Add Item"
+            R.id.RemoveItem -> selectedOption = "Remove item"
+            R.id.SignOut -> selectedOption = "Sign Out"
+        }
+        Toast.makeText(this,"Option:"+selectedOption,Toast.LENGTH_SHORT).show()
+        return super.onOptionsItemSelected(item)
     }
 }

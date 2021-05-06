@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Bookmark"
+        android:id="@+id/Bookmark"
+        android:onClick="bookMark"/>
+    <item
+        android:title="Add Item"
+        android:id="@+id/AddItem"
+        android:onClick="addItem"/>
+    <item
+        android:id="@+id/RemoveItem"
+        android:title="Remove Item"
+        android:onClick="removeItem"/>
+    <item
+        android:id="@+id/SignOut"
+        android:title="Sign Out"
+        android:onClick="signOut"/>
+</menu>
