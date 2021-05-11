@@ -1,3 +1,3 @@
 package net.larntech.libraryproject
 
-data class ExampleItem (var  imageResource: Int, var name:String, var desc:String)
+class  ExampleItem (val  imageResource: Int, var name:String, var desc:String,var like:Int, var visit:Int)

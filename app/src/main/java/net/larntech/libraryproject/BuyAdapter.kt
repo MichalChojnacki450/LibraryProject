@@ -1,29 +1,37 @@
 package net.larntech.libraryproject
 
+import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_description.view.*
 import kotlinx.android.synthetic.main.example_item.view.*
-import kotlinx.android.synthetic.main.example_item.view.image_view
-import kotlin.collections.ArrayList
-import android.app.AlertDialog
 
+class BuyAdapter (
+    val BuyList: ArrayList<BookmarkItem>,
+    val context: Context,
+): RecyclerView.Adapter<BuyAdapter.BuyViewHolder>(){
 
-class ExampleAdapter(
-        val exampleList: ArrayList<ExampleItem>,
-        val context: Context,
-) : RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuyViewHolder {
 
-    inner class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.example_item,parent,false)
+        return  BuyViewHolder(itemView)
+    }
 
-        var name:TextView
-        var desc:TextView
-        var mMenus:ImageView
+    override fun onBindViewHolder(holder: BuyAdapter.BuyViewHolder, position: Int) {
+        holder.bindItems(BuyList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return  BuyList.size
+    }
+    inner class BuyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        var name: TextView
+        var desc: TextView
+        var mMenus: ImageView
 
         init {
             name = itemView.findViewById(R.id.text_view_1)
@@ -33,13 +41,13 @@ class ExampleAdapter(
             mMenus.setOnClickListener{popupMenu(it)}
         }
 
-        fun bindItems(exampleItem: ExampleItem){
+        fun bindItems(exampleItem: BookmarkItem){
             itemView.text_view_1.text = exampleItem.name
             itemView.text_view_2.text = exampleItem.desc
             itemView.image_view.setImageResource(exampleItem.imageResource)
         }
         private fun popupMenu(itemView: View){
-            val position = exampleList[adapterPosition]
+            val position = BuyList[adapterPosition]
             val popupMenu = PopupMenu(context,itemView)
             popupMenu.inflate(R.menu.delete_menu)
             popupMenu.setOnMenuItemClickListener {
@@ -51,15 +59,15 @@ class ExampleAdapter(
                         AlertDialog.Builder(context)
                             .setView(itemView)
                             .setPositiveButton("OK"){
-                                dialog,_->
+                                    dialog,_->
                                 position.name = name.text.toString()
                                 position.desc = desc.text.toString()
                                 notifyDataSetChanged()
-                                Toast.makeText(context,"Book information Edited",Toast.LENGTH_LONG).show()
+                                Toast.makeText(context,"Book information Edited", Toast.LENGTH_LONG).show()
                                 dialog.dismiss()
                             }
                             .setNegativeButton("Cancel"){
-                                dialog,_->
+                                    dialog,_->
                                 dialog.dismiss()
                             }
                             .create()
@@ -72,14 +80,14 @@ class ExampleAdapter(
                             .setIcon(R.drawable.ic_warning)
                             .setMessage("Are you sure delete this book?")
                             .setPositiveButton("Yes"){
-                        dialog,_->
-                                exampleList.removeAt(adapterPosition)
+                                    dialog,_->
+                                BuyList.removeAt(adapterPosition)
                                 notifyDataSetChanged()
-                                Toast.makeText(context,"Deleted this book",Toast.LENGTH_LONG).show()
+                                Toast.makeText(context,"Deleted this book", Toast.LENGTH_LONG).show()
                                 dialog.dismiss()
                             }
                             .setNegativeButton("No"){
-                                dialog,_->
+                                    dialog,_->
                                 dialog.dismiss()
                             }
                             .create()
@@ -97,40 +105,5 @@ class ExampleAdapter(
                 .invoke(menu,true)
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
-
-        val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.example_item,parent,false)
-        return ExampleViewHolder(itemView)
-    }
-
-    override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
-        holder.bindItems(exampleList[position])
-
-        holder.itemView.setOnClickListener {
-            val exampleItem = exampleList.get(position)
-
-            var gLike : Int = exampleItem.like
-            var gName : String = exampleItem.name
-            var gDesc : String = exampleItem.desc
-            var gImageView : Int = exampleItem.imageResource
-
-            var intent = Intent(context,DescriptionActivity::class.java)
-
-            intent.putExtra("iLike",gLike)
-            intent.putExtra("iName", gName)
-            intent.putExtra("iDesc",gDesc)
-            intent.putExtra("iImageView",gImageView)
-
-            context.startActivity(intent)
-        }
-
-    }
-
-    override fun getItemCount(): Int{
-        return exampleList.size
-    }
-
 
 }
-

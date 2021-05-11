@@ -1,6 +1,5 @@
 package net.larntech.libraryproject
 
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,19 +9,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.example_item_bookmark.*
-import java.time.temporal.ValueRange
-import java.util.*
-import kotlin.collections.ArrayList
 
-class BookmarkActivity : AppCompatActivity() {
+class BuyListActivity : AppCompatActivity() {
 
-    val BookmarkList = ArrayList<BookmarkItem>()
-    private lateinit var adapter:BookmarkAdapter
+    val BuyList = ArrayList<BookmarkItem>()
+    private lateinit var adapter: BuyAdapter
     private lateinit var auth: FirebaseAuth;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bookmark)
+        setContentView(R.layout.activity_buy_list)
 
         auth = FirebaseAuth.getInstance()
         var intent = intent
@@ -33,19 +28,19 @@ class BookmarkActivity : AppCompatActivity() {
         val testName = Name
         val testDesc = Desc
 
-        BookmarkList.add(BookmarkItem(R.drawable.book1,"$testName","$testDesc",0,0))
+        BuyList.add(BookmarkItem(R.drawable.book1, "$testName", "$testDesc",0,0))
 
-        var adapter = BookmarkAdapter(BookmarkList,this)
-        recyclerView.layoutManager= LinearLayoutManager(this)
+
+        var adapter = BookmarkAdapter(BuyList, this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
-
-    fun  dashboard(menuItem: MenuItem){
+    fun  buy_dashboard(menuItem: MenuItem){
         val  intent = Intent(this,DashboardActivity::class.java)
         startActivity(intent)
     }
 
-    fun signOut(menuItem: MenuItem){
+    fun buy_sign_out(menuItem: MenuItem){
         auth.signOut()
         val intent = Intent(this,LoginActivity::class.java)
         startActivity(intent)
@@ -53,7 +48,7 @@ class BookmarkActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.bookmarkmenu,menu);
+        menuInflater.inflate(R.menu.buymenu,menu);
 
         return super.onCreateOptionsMenu(menu)
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Buy_Dashboard"
+        android:title="Dashboard"
+        android:onClick="buy_dashboard"/>
+    <item
+        android:id="@+id/Buy_sign_out"
+        android:title="Sign out"
+        android:onClick="buy_sign_out"/>
+</menu>

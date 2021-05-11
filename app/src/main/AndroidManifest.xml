@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LibraryProject">
-        <activity android:name=".AddItemActivity"></activity>
+        <activity android:name=".SortingByVisitActivity"></activity>
+        <activity android:name=".SortingByLikesActivity" />
+        <activity android:name=".BuyListActivity" />
         <activity android:name=".BookmarkActivity" />
-        <activity android:name=".DescriptionActivity" />
+        <activity
+            android:name=".DescriptionActivity"
+            android:parentActivityName=".DashboardActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".RegisterActivity">
             <intent-filter>

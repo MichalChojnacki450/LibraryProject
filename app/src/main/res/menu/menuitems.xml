@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="Bookmark"
-        android:id="@+id/Bookmark"
+        android:id="@+id/Buy_Bookmark"
         android:onClick="bookMark"/>
+    <item
+        android:title="BuyList"
+        android:id="@+id/BuyList"
+        android:onClick="buylist"/>
     <item
         android:title="Add Item"
         android:id="@+id/AddItem"
@@ -12,6 +16,14 @@
         android:id="@+id/RemoveItem"
         android:title="Remove Item"
         android:onClick="removeItem"/>
+    <item
+        android:id="@+id/Sorting"
+        android:title="Sorting"
+        android:onClick="sortingbylikes" />
+    <item
+        android:id="@+id/Notification"
+        android:title="Notification"
+        android:onClick="notification"/>
     <item
         android:id="@+id/SignOut"
         android:title="Sign Out"
